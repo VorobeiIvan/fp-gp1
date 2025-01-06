@@ -1,0 +1,24 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace # Видалення зайвих пробілів
+      - id: end-of-file-fixer # Додає новий рядок в кінці файлу, якщо його немає
+      - id: check-yaml # Перевірка синтаксису YAML
+      - id: debug-statements # Перевірка наявності debug-операторів (print, pdb)
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black # Автоматичне форматування Python-коду
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8 # Перевірка коду на стиль PEP8
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.14.1
+    hooks:
+      - id: mypy # Статичний аналіз типів Python
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1
+    hooks:
+      - id: isort # Сортування імпортів

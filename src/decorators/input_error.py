@@ -4,4 +4,5 @@ def input_error(func):
             return func(*args, **kwargs)
         except (ValueError, IndexError, KeyError, TypeError) as e:
             return str(e)
+
     return wrapper

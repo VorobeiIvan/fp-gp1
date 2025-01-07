@@ -1,8 +1,8 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
-def get_upcoming_birthdays(address_book):
-    """Get upcoming birthdays within 7 days."""
+def get_upcoming_birthdays(address_book, days=7):
+    """Get upcoming birthdays within a specified number of days."""
     today = datetime.today().date()
     upcoming_birthdays = []
 
@@ -16,10 +16,7 @@ def get_upcoming_birthdays(address_book):
 
             days_until_birthday = (birthday_this_year - today).days
 
-            if 0 <= days_until_birthday <= 7:
-                if birthday_this_year.weekday() >= 5:
-                    birthday_this_year += timedelta(days=(7 - birthday_this_year.weekday()))
-
+            if 0 <= days_until_birthday <= days:
                 upcoming_birthdays.append(f"{user.name.value}: {birthday_this_year.strftime('%d.%m.%Y')}")
 
     return "\n".join(upcoming_birthdays)

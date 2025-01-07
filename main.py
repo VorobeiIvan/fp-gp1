@@ -1,20 +1,23 @@
 from src.notes.models import NotesManager
+from src.constants import COMMANDS, COMMAND_LIST
+from src.notes.models import NotesManager
+from prompt_toolkit import PromptSession
+from prompt_toolkit.completion import WordCompleter
 
 
 def personal_assistant_app():
     notes_manager = NotesManager()
 
-    commands = """
-Available commands:
-1. add-note - Add a new note
-2. show-notes - Show all notes
-3. exit - Exit the application
-    """
+    commands_text = "\nAvailable commands:\n"
+    for idx, (command, description) in enumerate(COMMANDS.items(), start=1):
+        commands_text += f"{idx}. {command} - {description}\n"
+    print(commands_text)
 
-    print(commands)
+    command_completer = WordCompleter(COMMAND_LIST, ignore_case=True)
+    session = PromptSession(completer=command_completer)
 
     while True:
-        command = input("Enter a command: ").strip().lower()
+        command = session.prompt("Enter a command: ").strip().lower()
 
         match command:
             case "add-note":
@@ -29,7 +32,7 @@ Available commands:
 
             case _:
                 print("Invalid command. Please try again.")
-                print(commands)
+                print(commands_text)
 
 
 if __name__ == "__main__":

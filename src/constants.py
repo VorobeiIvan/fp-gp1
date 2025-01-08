@@ -5,6 +5,7 @@ COMMANDS = {
     "show-notes": "This command displays all saved notes.",
     "search-notes": "This command allows you to search notes by title, content, or tags.",
     "delete-note": "This command allows you to delete a note.",
+    "edit-note": "This command allows you to edit a note.",
     "exit": "Exit the application.",
 }
 

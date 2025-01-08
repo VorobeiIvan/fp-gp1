@@ -32,6 +32,9 @@ def personal_assistant_app():
                 case "delete-note":
                     notes_manager.delete_note()
 
+                case "edit-note":
+                    notes_manager.edit_note()
+
                 case "exit":
                     print("Exiting application. Goodbye!")
                     break

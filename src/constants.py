@@ -1,16 +1,25 @@
 COMMANDS = {
-    "add-note": "Add a new note.",
-    "show-notes": "Displays all saved notes.",
+    #General commands
+    "hello": "Start the bot.",
     "exit": "Exit the application.",
     "close": "Exit the application.",
-    "hello": "Displays a greeting message.",
-    "add": "Add a new contact.",
-    "change": "Change the phone number of an existing contact.",
-    "phone": "Displays the phone number of a contact.",
-    "all": "Displays all contacts.",
+    "all": "Show all contacts.",
+    "help": "Show available commands.",
+    #Note commands
+    "add-note": "This command allows you to add a new note.",
+    "show-notes": "This command displays all saved notes.",
+    "search-notes": "This command allows you to search notes by title, content, or tags.",
+    "delete-note": "This command allows you to delete a note.",
+    "edit-note": "This command allows you to edit a note.",
+    #Contact commands
+    "add-contact": "Add a new contact.",
+    "change-contact": "Change an existing contact.",
+    "phone": "Show the phone number by name.",
+    #Birthday commands
     "add-birthday": "Add a birthday to a contact.",
-    "show-birthday": "Displays the birthday of a contact.",
-    "birthdays": "Displays all birthdays.",
+    "show-birthday": "Show the birthday by name.",
+    "birthdays": "Show birthdays happening next week.",
+    
 }
 
 

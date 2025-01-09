@@ -1,6 +1,6 @@
 from colorama import Fore, Style, init
 
-from constants import messages, messages_error
+from src.constants import messages, messages_error
 
 init(autoreset=True)
 

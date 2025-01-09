@@ -36,7 +36,7 @@
 
 3. Запустіть бота:
    ```bash
-   python main.py
+   python3 main.py
    ```
 
 ## Опис проекту

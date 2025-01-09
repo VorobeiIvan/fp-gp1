@@ -1,6 +1,6 @@
 import re
 from datetime import datetime
-from src.decorators.colorize_message import print_error, print_success, print_warning, print_hint
+from src.decorators.colorize_message import print_error, print_warning
 
 
 def validate_name(name: str, contacts) -> bool:

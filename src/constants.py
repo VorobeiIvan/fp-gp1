@@ -8,11 +8,10 @@ COMMANDS = {
     "delete-note": "This command allows you to delete a note.",
     "edit-note": "This command allows you to edit a note.",
     "add-contact": "Add a new contact.",
-    "show-contact": "Show the phone number by name.",
+    "show-contacts": "Show the phone number by name.",
     "search-contacts": "Search for contacts by name or phone number.",
     "edit-contact": "Change an existing contact.",
     "delete-contact": "Delete a contact.",
-    "show-all-contacts": "Show all contacts.",
     "birthday-in-days": "Show contacts with birthdays in the next N days."
 }
 

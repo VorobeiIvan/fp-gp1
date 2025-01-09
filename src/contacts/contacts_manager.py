@@ -20,7 +20,7 @@ class Contact:
         self.birthday = birthday
 
     def __repr__(self):
-        return f"Contact(name={self.name}, address={self.address}, phone={self.phone}, email={self.email}, birthday={self.birthday})"
+        return f"Name: {self.name}\nAddress: {self.address}\nPhone: {self.phone}\nEmail: {self.email}\nBirthday: {self.birthday}\n"
 
 class ContactsManager:
     def __init__(self, storage_file="contacts.pkl"):
@@ -69,7 +69,8 @@ class ContactsManager:
     def show_all_contacts(self):
         if not self.contacts:
             return print_error("No contacts available.")
-        return self.contacts
+        for contact in self.contacts:
+            print(contact)
 
     def search_contacts(self, args):
         if len(args) == 0:
@@ -122,10 +123,14 @@ class ContactsManager:
         self.save_contacts()
         print_success(f"Contact deleted successfully!")
 
-    def birthday_in_days(self, days):
+    def birthday_in_days(self, args):
         """
         Returns a list of contacts who have birthdays in the next 'days' days.
         """
+        if len(args) == 0:
+            return print_error("Please provide the number of the days")
+
+        days = int(args[0])
         today = datetime.today()
         upcoming_contacts = []
 
@@ -142,5 +147,9 @@ class ContactsManager:
                     upcoming_contacts.append(contact)
             except ValueError:
                 print_error(f"Invalid birthday format for contact {contact.name}. Skipping...")
-
-        return upcoming_contacts
+        if upcoming_contacts:
+            print_success(f"Contacts with birthdays in the next {days} days:")
+            for contact in upcoming_contacts:
+                print(contact)
+        else:
+            print_error("No contacts with upcoming birthdays in the specified range.")

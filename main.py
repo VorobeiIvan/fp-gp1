@@ -70,20 +70,7 @@ def personal_assistant_app():
                         show_all()
 
                     case "birthday-in-days":
-                        if not args:
-                            print_error("Please provide the number of days as an argument.")
-                            continue
-                        try:
-                            days = int(args[0])
-                            contacts_with_upcoming_birthdays = contacts_manager.birthday_in_days(days)
-                            if contacts_with_upcoming_birthdays:
-                                print_success(f"Contacts with birthdays in the next {days} days:")
-                                for contact in contacts_with_upcoming_birthdays:
-                                    print(contact)
-                            else:
-                                print_error("No contacts with upcoming birthdays in the specified range.")
-                        except ValueError:
-                            print_error("Invalid input. Please provide a valid number of days.")
+                        contacts_manager.birthday_in_days(args)
 
                     case "exit":
                         print_success("Exiting application. Goodbye!")

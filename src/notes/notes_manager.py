@@ -1,5 +1,7 @@
 import os
 import pickle
+
+from src.decorators.colorize_message import print_error, print_warning, print_success
 from src.decorators.handle_keyboard_interrupt import handle_keyboard_interrupt
 
 
@@ -11,10 +13,10 @@ class NotesManager:
 
     def validate_title(self, title: str) -> bool:
         if not title.strip():
-            print("Title should not be empty.")
+            print_error("Title should not be empty.")
             return False
         if title in self.notes:
-            print("Note with this title already exists!")
+            print_warning("Note with this title already exists!")
             return False
         return True
 
@@ -40,7 +42,7 @@ class NotesManager:
             "Add tags? (y/n): ").strip().lower() == "y" else []
 
         if title in self.notes:
-            print("Note with this title already exists!")
+            print_warning("Note with this title already exists!")
             return
 
         self.notes[title] = {
@@ -48,11 +50,11 @@ class NotesManager:
             "tags": tags if tags else []
         }
         self.save_notes()
-        print(f"Note '{title}' added successfully!")
+        print_success(f"Note '{title}' added successfully!")
 
     def list_notes(self):
         if not self.notes:
-            print("No notes available.")
+            print_warning("No notes available.")
         for title, note in self.notes.items():
             print(f"Title: {title}\nContent: {note['content']}\nTags: {', '.join(note['tags'])}\n")
 
@@ -66,7 +68,7 @@ class NotesManager:
                        any(query.lower() in tag.lower() for tag in note['tags'])}
 
         if not found_notes:
-            print(f"No notes found for '{query}'.")
+            print_warning(f"No notes found for '{query}'.")
         else:
             for title, note in found_notes.items():
                 print(f"Title: {title}\nContent: {note['content']}\nTags: {', '.join(note['tags'])}\n")
@@ -76,24 +78,24 @@ class NotesManager:
 
         title = input("Enter the title of the note to delete: ")
         if title not in self.notes:
-            print(f"No note found with the title '{title}'.")
+            print_warning(f"No note found with the title '{title}'.")
             return
 
         confirmation = input(f"Are you sure you want to delete the note '{title}'? (y/n): ").strip().lower()
         if confirmation != 'y':
-            print("Note deletion cancelled.")
+            print_warning("Note deletion cancelled.")
             return
 
         del self.notes[title]
         self.save_notes()
-        print(f"Note '{title}' deleted successfully!")
+        print_success(f"Note '{title}' deleted successfully!")
 
     @handle_keyboard_interrupt
     def edit_note(self):
 
         title = input("Enter the title of the note to edit: ")
         if title not in self.notes:
-            print(f"No note found with the title '{title}'.")
+            print_warning(f"No note found with the title '{title}'.")
             return
 
         print(f"Current content: {self.notes[title]['content']}")
@@ -102,7 +104,7 @@ class NotesManager:
 
         confirmation = input(f"Do you want to edit the note '{title}'? (y/n): ").strip().lower()
         if confirmation != 'y':
-            print("Note editing cancelled.")
+            print_warning("Note editing cancelled.")
             return
 
         new_content = input("Enter new content for the note (leave empty to keep current): ").strip()
@@ -114,4 +116,4 @@ class NotesManager:
             self.notes[title]['tags'] = [tag.strip() for tag in new_tags.split(",") if tag.strip()]
 
         self.save_notes()
-        print(f"Note '{title}' updated successfully!")
+        print_success(f"Note '{title}' updated successfully!")

@@ -17,7 +17,7 @@ def show_all():
 def personal_assistant_app():
     """Main bot loop."""
     # Initialize ContactsManager and NotesManager for managing contacts and notes
-    contacts_manager = ContactsManager() 
+    contacts_manager = ContactsManager()
     notes_manager = NotesManager()
 
     # Display the available commands to the user
@@ -64,10 +64,10 @@ def personal_assistant_app():
                         result = notes_manager.delete_note()
                     case "edit-note":
                         result = notes_manager.edit_note()
-                    
+
                     # General commands
                     case "show-all":
-                        result = show_all() 
+                        result = show_all()
 
                     case "exit":
                         print_success("Exiting application. Goodbye!")
@@ -85,7 +85,7 @@ def personal_assistant_app():
 
             except Exception as e:
                 print_error(f"Error occurred: {str(e)}")
-                
+
         except KeyboardInterrupt:
             print_success("Exiting application. Goodbye!")
             break

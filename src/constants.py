@@ -25,4 +25,3 @@ CONTACTS_FIELDS = {
         }
 
 COMMAND_LIST = list(COMMANDS.keys())
-

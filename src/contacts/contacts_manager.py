@@ -56,7 +56,11 @@ class ContactsManager:
 
         print_success(f"Contact '{contact['name']}' added successfully!")
 
-    def show_contact(self, name):
+    def show_contact(self, args):
+        if len(args) == 0:
+            return print_error("Please provide the name as an argument.")
+        name = args[0]
+
         for contact in self.contacts:
             if contact.name.lower() == name.lower():
                 return contact
@@ -67,10 +71,27 @@ class ContactsManager:
             return print_error("No contacts available.")
         return self.contacts
 
-    def search_contacts(self, keyword):
+    def search_contacts(self, args):
+        if len(args) == 0:
+            return print_error("Please provide the keyword as an argument.")
+        keyword = args[0]
         return [contact for contact in self.contacts if keyword.lower() in contact.name.lower()]
 
-    def edit_contact(self, index, name=None, address=None, phone=None, email=None, birthday=None):
+    def edit_contact(self, args):
+        if len(args) == 0:
+            return print_error("Please provide at least the index as an argument.")
+
+        index = int(args[0])
+        name = args[1] if len(args) > 1 else None
+        address = args[2] if len(args) > 2 else None
+        phone = args[3] if len(args) > 3 else None
+        email = args[4] if len(args) > 4 else None
+        birthday = args[5] if len(args) > 5 else None
+
+        if index >= len(self.contacts):
+            return print_error("Nothing found. Invalid index.")
+
+
         if name and not validate_name(name, self.contacts):
             return print_error("Name should not be empty.")
         if address and not validate_address(address):
@@ -90,9 +111,16 @@ class ContactsManager:
         contact.birthday = birthday or contact.birthday
         self.save_contacts()
 
-    def delete_contact(self, index):
+    def delete_contact(self, args):
+        if len(args) == 0:
+            return print_error("Please provide the index as an argument.")
+        index = int(args[0])
+
+        if index >= len(self.contacts):
+            return print_error("Nothing found. Invalid index.")
         del self.contacts[index]
         self.save_contacts()
+        print_success(f"Contact deleted successfully!")
 
     def birthday_in_days(self, days):
         """

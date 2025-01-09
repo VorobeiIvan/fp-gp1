@@ -35,7 +35,7 @@ def personal_assistant_app():
             # Prompt the user to enter a command
             user_input = session.prompt("Enter a command: ")
             command, args = parse_input(user_input)
-
+            result = None
             try:
                 # Process the command
                 match command:
@@ -43,13 +43,13 @@ def personal_assistant_app():
                     case "add-contact":
                         result = contacts_manager.add_contact()
                     case "show-contact":
-                        result = contacts_manager.show_contact()
+                        result = contacts_manager.show_contact(args)
                     case "search-contacts":
-                        result = contacts_manager.search_contacts()
+                        result = contacts_manager.search_contacts(args)
                     case "delete-contact":
-                        result = contacts_manager.delete_contact()
+                        result = contacts_manager.delete_contact(args)
                     case "edit-contact":
-                        result = contacts_manager.edit_contact()
+                        result = contacts_manager.edit_contact(args)
                     case "show-all-contacts":
                         result = contacts_manager.show_all_contacts()
 
@@ -67,7 +67,7 @@ def personal_assistant_app():
 
                     # General commands
                     case "show-all":
-                        result = show_all()
+                        show_all()
 
                     case "birthday-in-days":
                         if not args:

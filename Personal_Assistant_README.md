@@ -1,3 +1,4 @@
+
 # Personal Assistant
 
 This project is a simple personal assistant that allows you to manage contacts and notes via the command line interface. Users can add, edit, delete, and view contacts and notes, along with several other features via the console.
@@ -5,7 +6,6 @@ This project is a simple personal assistant that allows you to manage contacts a
 ## Project Overview
 
 The Personal Assistant has the following features:
-
 - Add, edit, delete, and view contacts.
 - Add, edit, delete, and view notes.
 - Search contacts and notes by various criteria.
@@ -15,7 +15,6 @@ The Personal Assistant has the following features:
 ## Functionality
 
 ### Commands:
-
 - **show-all** — Displays all contacts and notes.
 - **add-contact** — Adds a new contact.
 - **show-contact** — Displays a contact by name.
@@ -32,7 +31,6 @@ The Personal Assistant has the following features:
 - **help** — Shows available commands.
 
 ### Requirements:
-
 - Python 3.7+
 - Libraries:
   - `prompt_toolkit~=3.0.48`
@@ -41,25 +39,50 @@ The Personal Assistant has the following features:
 ## How to Run
 
 ### 1. Clone the repository:
-
 ```bash
-git clone https://github.com/VorobeiIvan/fp-gp1.git
+git clone https://github.com/yourusername/personal-assistant.git
 ```
 
 ### 2. Navigate to the project directory:
-
 ```bash
 cd personal-assistant
 ```
 
 ### 3. Install the dependencies:
-
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 4. Run the program:
-
 ```bash
 python main.py
 ```
+
+### 5. Use the available commands in the command line.
+
+## Project Structure
+
+```bash
+.
+├── README.md               # Project description
+├── contacts.pkl            # File for storing contacts
+├── main.py                 # Main script to start the program
+├── notes.pkl               # File for storing notes
+├── requirements.txt        # List of dependencies
+└── src
+    ├── __pycache__         # Compiled Python files
+    ├── constants.py        # Constants and commands
+    ├── contacts            # Modules for managing contacts
+    ├── decorators          # Decorators for styling and error handling
+    ├── notes               # Modules for managing notes
+    ├── parser.py           # Command parsing logic
+    └── storage.py          # Module for data storage
+```
+
+## Contributing
+
+Contributions to this project are welcome! To contribute, please fork the repository and submit a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for more details.

@@ -7,9 +7,8 @@ from src.contacts.contact_validators import (
 )
 from src.storage import load_data, save_data
 from src.decorators.handle_keyboard_interrupt import handle_keyboard_interrupt
-from src.decorators.colorize_message import print_error,print_success,print_warning
+from src.decorators.colorize_message import print_success,print_warning
 from src.constants import CONTACTS_FIELDS
-from datetime import datetime
 
 class Contact:
     def __init__(self, name: str, address: str, phone: str, email: str, birthday: str):
@@ -29,17 +28,6 @@ class ContactsManager:
 
     def save_contacts(self) -> None:
         save_data(self.contacts, self.storage_file)
-
-    @staticmethod
-    def validate_name(name: str, contacts: list[Contact]) -> bool:
-        if not name.strip():
-            print_warning("Name should not be empty.")
-            return False
-        if any(contact.name == name for contact in contacts):
-            print_warning("Contact with this name already exists!")
-            return False
-        return True
-
 
     @handle_keyboard_interrupt
     def add_contact(self) -> None:
@@ -129,23 +117,3 @@ class ContactsManager:
         self.save_contacts()
         print_success(f"Contact '{name}' updated successfully!")
 
-    @handle_keyboard_interrupt
-    def birthday_in_days(self, days: int) -> None:
-        today = datetime.today()
-        birthday_contacts = []
-        for contact in self.contacts:
-            try:
-                birthday = datetime.strptime(contact.birthday, "%d-%m-%Y")
-                birthday = birthday.replace(year=today.year)
-                if birthday < today:
-                    birthday = birthday.replace(year=today.year + 1)
-                if 0 <= (birthday - today).days <= days:
-                    birthday_contacts.append(contact)
-            except ValueError:
-                print_error(f"Invalid birthday format for contact {contact.name}: {contact.birthday}")
-
-        if birthday_contacts:
-            for contact in birthday_contacts:
-                print_success(f"Upcoming birthday: {contact}")
-        else:
-            print_warning("No upcoming birthdays found.")

@@ -40,6 +40,7 @@ messages_error = {
     "usage_add_birthday": "Invalid input. Usage: add-birthday [name] [date]",
     "usage_show_birthday": "Invalid input. Usage: show-birthday [name]",
     "usage_birthdays": "Invalid input. Usage: birthdays",
+    "exit": "Exit the application.",
 }
 
 messages = {

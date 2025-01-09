@@ -114,4 +114,5 @@ class NotesManager:
             self.notes[title]['tags'] = [tag.strip() for tag in new_tags.split(",") if tag.strip()]
 
         self.save_notes()
+
         print(f"Note '{title}' updated successfully!")

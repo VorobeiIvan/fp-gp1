@@ -5,4 +5,5 @@ def handle_keyboard_interrupt(func):
             return func(*args, **kwargs)
         except KeyboardInterrupt:
             print("\n Operation cancelled. Returning to main menu.")
+            
     return wrapper

@@ -85,7 +85,16 @@ def personal_assistant_app():
 
                 case _:
                     print(messages_error["invalid"])
+
+
+                case "exit":
+                    print("Exiting application. Goodbye!")
+                    break
+
+                case _:
+                    print("Invalid command. Please try again.")
                     print(commands_text)
+                    
         except KeyboardInterrupt:
             print("Exiting application. Goodbye!")
             break

@@ -1,3 +1,4 @@
+from datetime import datetime
 from src.contacts.contact_validators import (
     validate_name,
     validate_address,
@@ -8,10 +9,7 @@ from src.contacts.contact_validators import (
 from src.storage import load_data, save_data
 from src.decorators.handle_keyboard_interrupt import handle_keyboard_interrupt
 from src.constants import CONTACTS_FIELDS
-from src.decorators.colorize_message import print_error,print_success
-from datetime import datetime
-
-
+from src.decorators.colorize_message import print_error, print_success
 
 class Contact:
     def __init__(self, name, address, phone, email, birthday):
@@ -24,7 +22,6 @@ class Contact:
     def __repr__(self):
         return f"Contact(name={self.name}, address={self.address}, phone={self.phone}, email={self.email}, birthday={self.birthday})"
 
-
 class ContactsManager:
     def __init__(self, storage_file="contacts.pkl"):
         self.storage_file = storage_file
@@ -36,7 +33,7 @@ class ContactsManager:
     @handle_keyboard_interrupt
     def add_contact(self):
         contact = {}
-      
+
         for field, prompt in CONTACTS_FIELDS.items():
             while True:
                 value = input(prompt)
@@ -84,7 +81,7 @@ class ContactsManager:
             return print_error("Email is invalid. Please enter a valid email. Example: example@example.com")
         if birthday and not validate_birthday(birthday):
             return print_error("Birthday is invalid. Please enter a valid birthday. Example: 01-01-2000")
-        
+
         contact = self.contacts[index]
         contact.name = name or contact.name
         contact.address = address or contact.address
@@ -98,16 +95,24 @@ class ContactsManager:
         self.save_contacts()
 
     def birthday_in_days(self, days):
+        """
+        Returns a list of contacts who have birthdays in the next 'days' days.
+        """
         today = datetime.today()
-        birthday_contacts = []
+        upcoming_contacts = []
+
         for contact in self.contacts:
-            for date_format in ["%d-%m-%Y", "%d/%m/%Y", "%d.%m.%Y"]:
-                try:
-                    birthday = datetime.strptime(contact.birthday, date_format)
-                    break
-                except ValueError:
-                    print_error("Birthday is invalid. Please enter a valid birthday. Example: 01-01-2000")
-                    continue
-            if 0 <= (birthday - today).days <= days:
-                birthday_contacts.append(contact)
-        return birthday_contacts
+            try:
+                birthday = datetime.strptime(contact.birthday, "%d-%m-%Y")
+                next_birthday = birthday.replace(year=today.year)
+
+                # If the birthday has passed this year, check for the next year
+                if next_birthday < today:
+                    next_birthday = birthday.replace(year=today.year + 1)
+
+                if 0 <= (next_birthday - today).days <= days:
+                    upcoming_contacts.append(contact)
+            except ValueError:
+                print_error(f"Invalid birthday format for contact {contact.name}. Skipping...")
+
+        return upcoming_contacts

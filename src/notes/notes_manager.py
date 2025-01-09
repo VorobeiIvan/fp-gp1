@@ -117,3 +117,12 @@ class NotesManager:
 
         self.save_notes()
         print_success(f"Note '{title}' updated successfully!")
+
+    def sort_notes_by_tag(self):
+        sorted_notes = sorted(self.notes.items(), key=lambda item: len(item[1]['tags']))
+        if not sorted_notes:
+            print_warning("No notes available to sort.")
+        else:
+            for title, note in sorted_notes:
+                print(f"Title: {title}\nContent: {note['content']}\nTags: {', '.join(note['tags'])}\n")
+

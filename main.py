@@ -64,6 +64,8 @@ def personal_assistant_app():
                         result = notes_manager.delete_note()
                     case "edit-note":
                         result = notes_manager.edit_note()
+                    case "sort-notes":
+                        result = notes_manager.sort_notes_by_tag()
 
                     # General commands
                     case "show-all":

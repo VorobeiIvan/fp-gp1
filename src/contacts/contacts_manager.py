@@ -116,9 +116,13 @@ class ContactsManager:
     def delete_contact(self, args):
         if len(args) == 0:
             return print_error("Please provide the index as an argument.")
-        index = args[0]
+        index = int(args[0])
+
+        if index >= len(self.contacts):
+            return print_error("Nothing found. Invalid index.")
         del self.contacts[index]
         self.save_contacts()
+        print_success(f"Contact deleted successfully!")
 
     def birthday_in_days(self, days):
         today = datetime.today()

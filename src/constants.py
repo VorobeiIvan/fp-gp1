@@ -11,7 +11,7 @@ COMMANDS = {
     "show-contact": "Show the phone number by name.",
     "search-contacts": "Search for contacts by name or phone number.",
     "edit-contact": "Change an existing contact.",
-    "sort-notes": "Sort notes by tags.",
+    "sort-notes": "Sort notes by tags length.",
     "delete-contact": "Delete a contact.",
     "show-all-contacts": "Show all contacts.",
     "birthday-in-days": "Show contacts with birthdays in the next N days."

@@ -7,7 +7,6 @@ from src.parser import parse_input
 from src.decorators.colorize_message import print_error, print_success, print_warning
 from src.commands import show_all, birthday_in_days
 
-
 def personal_assistant_app():
     """Main bot loop."""
     # Initialize ContactsManager and NotesManager for managing contacts and notes
@@ -44,7 +43,6 @@ def personal_assistant_app():
                         result = contacts_manager.delete_contact()
                     case "edit-contact":
                         result = contacts_manager.edit_contact()
-
 
                     # Note-related commands
                     case "add-note":

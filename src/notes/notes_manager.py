@@ -125,3 +125,4 @@ class NotesManager:
         else:
             for title, note in sorted_notes:
                 print(f"Title: {title}\nContent: {note['content']}\nTags: {', '.join(note['tags'])}\n")
+

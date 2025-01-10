@@ -4,15 +4,8 @@ from src.constants import COMMANDS, COMMAND_LIST
 from src.contacts.contacts_manager import ContactsManager
 from src.notes.notes_manager import NotesManager
 from src.parser import parse_input
-from src.decorators.colorize_message import print_error, print_success, print_warning, print_hint, print_default
-
-def show_all():
-    """Show all contacts and notes."""
-    print_default("All contacts and notes:")
-    print_hint("Contacts:")
-    print_default(ContactsManager().show_all_contacts())
-    print_hint("Notes:")
-    print_default(NotesManager().list_notes())
+from src.decorators.colorize_message import print_error, print_success, print_warning
+from src.commands import show_all, birthday_in_days
 
 def personal_assistant_app():
     """Main bot loop."""
@@ -41,17 +34,15 @@ def personal_assistant_app():
                 match command:
                     # Contact-related commands
                     case "add-contact":
-                        result = contacts_manager.add_contact()
-                    case "show-contact":
-                        result = contacts_manager.show_contact(args)
+                        contacts_manager.add_contact()
+                    case "show-contacts":
+                        contacts_manager.show_contacts()
                     case "search-contacts":
-                        result = contacts_manager.search_contacts(args)
+                        contacts_manager.search_contacts()
                     case "delete-contact":
-                        result = contacts_manager.delete_contact(args)
+                        contacts_manager.delete_contact()
                     case "edit-contact":
-                        result = contacts_manager.edit_contact(args)
-                    case "show-all-contacts":
-                        result = contacts_manager.show_all_contacts()
+                        contacts_manager.edit_contact()
 
                     # Note-related commands
                     case "add-note":
@@ -72,8 +63,9 @@ def personal_assistant_app():
                         show_all()
 
                     case "birthday-in-days":
-                        contacts_manager.birthday_in_days(args)
-
+                        birthday_in_days()
+                    case "birthdays":
+                        birthday_in_days()
                     case "exit":
                         print_success("Exiting application. Goodbye!")
                         break

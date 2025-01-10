@@ -1,6 +1,6 @@
 import re
 from datetime import datetime
-from src.decorators.colorize_message import print_error, print_success, print_warning, print_hint
+from src.decorators.colorize_message import print_error, print_warning
 
 
 def validate_name(name: str, contacts) -> bool:
@@ -27,7 +27,7 @@ def validate_address(address) -> bool:
 def validate_phone(phone) -> bool:
     pattern = r'^\+?\d{1,3}?\d{10}$'
     if not re.match(pattern, phone):
-        print_error("Phone number is invalid. Please enter a valid phone number. Example: +1234567890")
+        print_error("Phone number is invalid. Please enter a valid phone number. Example: +38012123456")
         return False
     return True
 
@@ -41,7 +41,7 @@ def validate_email(email) -> bool:
 
 
 def validate_birthday(birthday) -> bool:
-    date_formats = ["%d-%m-%Y", "%d/%m/%Y", "%d.%m.%Y"]
+    date_formats = ["%d-%m-%Y"]
     for date_format in date_formats:
         try:
             datetime.strptime(birthday, date_format)
@@ -50,3 +50,4 @@ def validate_birthday(birthday) -> bool:
             continue
     print_error("Birthday is invalid. Please enter a valid birthday. Example: 01-01-2000")
     return False
+

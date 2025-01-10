@@ -15,7 +15,15 @@ def show_all():
 def birthday_in_days():
     """
     Displays a list of contacts with their birthdays and the number of days until their next birthday.
+    Allows the user to specify a range of days to filter the results.
     """
+    try:
+        days_range = input("Enter the number of days to filter birthdays (leave blank for all upcoming): ").strip()
+        days_range = int(days_range) if days_range else None
+    except ValueError:
+        print_warning("Invalid input. Showing all upcoming birthdays.")
+        days_range = None
+
     today = datetime.today()
     upcoming_contacts = []
 
@@ -35,7 +43,10 @@ def birthday_in_days():
 
             # Calculate the number of days until the next birthday
             days_until = (next_birthday - today).days
-            upcoming_contacts.append((contact.name, birthday.strftime("%d-%m-%Y"), days_until))
+
+            # Filter based on the specified range if provided
+            if days_range is None or days_until <= days_range:
+                upcoming_contacts.append((contact.name, birthday.strftime("%d-%m-%Y"), days_until))
         except ValueError:
             print_error(f"Invalid birthday format for contact {contact.name}. Expected format is DD-MM-YYYY.")
 
@@ -44,4 +55,4 @@ def birthday_in_days():
         for name, birthday, days_until in sorted(upcoming_contacts, key=lambda x: x[2]):
             print(f"- {name}: {birthday} (in {days_until} days)")
     else:
-        print_warning("No contacts have valid birthday information.")
+        print_warning("No contacts have valid birthday information or no birthdays within the specified range.")

@@ -41,7 +41,7 @@ def validate_email(email) -> bool:
 
 
 def validate_birthday(birthday) -> bool:
-    date_formats = "%d-%m-%Y"
+    date_formats = ["%d-%m-%Y"]
     for date_format in date_formats:
         try:
             datetime.strptime(birthday, date_format)
@@ -50,3 +50,4 @@ def validate_birthday(birthday) -> bool:
             continue
     print_error("Birthday is invalid. Please enter a valid birthday. Example: 01-01-2000")
     return False
+

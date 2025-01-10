@@ -34,15 +34,15 @@ def personal_assistant_app():
                 match command:
                     # Contact-related commands
                     case "add-contact":
-                        result = contacts_manager.add_contact()
+                        contacts_manager.add_contact()
                     case "show-contacts":
-                        result = contacts_manager.show_contacts()
+                        contacts_manager.show_contacts()
                     case "search-contacts":
-                        result = contacts_manager.search_contacts()
+                        contacts_manager.search_contacts()
                     case "delete-contact":
-                        result = contacts_manager.delete_contact()
+                        contacts_manager.delete_contact()
                     case "edit-contact":
-                        result = contacts_manager.edit_contact()
+                        contacts_manager.edit_contact()
 
                     # Note-related commands
                     case "add-note":
@@ -63,8 +63,9 @@ def personal_assistant_app():
                         show_all()
 
                     case "birthday-in-days":
-                        result = birthday_in_days()
-
+                        birthday_in_days()
+                    case "birthdays":
+                        birthday_in_days()
                     case "exit":
                         print_success("Exiting application. Goodbye!")
                         break

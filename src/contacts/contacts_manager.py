@@ -64,18 +64,23 @@ class ContactsManager:
     @handle_keyboard_interrupt
     def search_contacts(self) -> None:
         query = input("Enter search query: ")
+    
+        def safe_lower(value):
+            return value.lower() if isinstance(value, str) else ""
+    
         found_contacts = [contact for contact in self.contacts if 
-                          query.lower() in contact.name.lower() or
-                          query.lower() in contact.address.lower() or
-                          query.lower() in contact.phone.lower() or
-                          query.lower() in contact.email.lower() or
-                          query.lower() in contact.birthday.lower()]
-
+                        query.lower() in safe_lower(contact.name) or
+                        query.lower() in safe_lower(contact.address) or
+                        query.lower() in safe_lower(contact.phone) or
+                        query.lower() in safe_lower(contact.email) or
+                        query.lower() in safe_lower(contact.birthday)]
+    
         if not found_contacts:
             print_warning(f"No contacts found for '{query}'.")
         else:
             for contact in found_contacts:
                 print_success(f"Name: {contact.name}\nAddress: {contact.address}\nPhone: {contact.phone}\nEmail: {contact.email}\nBirthday: {contact.birthday}\n")
+
 
     @handle_keyboard_interrupt
     def delete_contact(self) -> None:
@@ -97,23 +102,43 @@ class ContactsManager:
 
     @handle_keyboard_interrupt
     def edit_contact(self) -> None:
-        name = input("Enter the name of the contact to edit: ")
+        name = input("Enter the name of the contact to edit: ").strip()
         contact_to_edit = next((contact for contact in self.contacts if contact.name == name), None)
 
         if not contact_to_edit:
             print_warning(f"No contact found with the name '{name}'.")
             return
 
-        new_address = input(f"Enter new address (current: {contact_to_edit.address}): ").strip() or contact_to_edit.address
-        new_phone = input(f"Enter new phone (current: {contact_to_edit.phone}): ").strip() or contact_to_edit.phone
-        new_email = input(f"Enter new email (current: {contact_to_edit.email}): ").strip() or contact_to_edit.email
-        new_birthday = input(f"Enter new birthday (current: {contact_to_edit.birthday}): ").strip() or contact_to_edit.birthday
+        print(f"Editing contact '{name}':")
+        while True:
+            new_address = input(f"Enter new address (current: {contact_to_edit.address}): ").strip() or contact_to_edit.address
+            if validate_address(new_address):
+                contact_to_edit.address = new_address
+                break
+            print("Invalid address. Please try again.")
 
-        contact_to_edit.address = new_address
-        contact_to_edit.phone = new_phone
-        contact_to_edit.email = new_email
-        contact_to_edit.birthday = new_birthday
+        while True:
+            new_phone = input(f"Enter new phone (current: {contact_to_edit.phone}): ").strip() or contact_to_edit.phone
+            if validate_phone(new_phone):
+                contact_to_edit.phone = new_phone
+                break
+            print("Invalid phone number. Please try again.")
+
+        while True:
+            new_email = input(f"Enter new email (current: {contact_to_edit.email}): ").strip() or contact_to_edit.email
+            if validate_email(new_email):
+                contact_to_edit.email = new_email
+                break
+            print("Invalid email address. Please try again.")
+
+        while True:
+            new_birthday = input(f"Enter new birthday (current: {contact_to_edit.birthday}): ").strip() or contact_to_edit.birthday
+            if validate_birthday(new_birthday):
+                contact_to_edit.birthday = new_birthday
+                break
+            print("Invalid birthday. Format should be DD-MM-YYYY.")
 
         self.save_contacts()
-        print_success(f"Contact '{name}' updated successfully!")
+        print(f"Contact '{name}' updated successfully!")
+
 

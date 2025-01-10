@@ -17,15 +17,15 @@ COMMANDS = {
     "delete-contact": "Delete a contact.",
     "edit-contact": "Change an existing contact.",
     # Birthday-related commands
-    "birthday-in-days": "Show contacts with birthdays in the next N days."
+    "birthday-in-days": "Show contacts with birthdays in the next N days.",
 }
 
 CONTACTS_FIELDS = {
-        "name": "Enter contact name (example: John Doe): ",
-        "address": "Enter contact address (example: 123 Main St): ",
-        "phone": "Enter contact phone number (example: +380121234567): ",
-        "email": "Enter contact email (example: email@example.com): ",
-        "birthday": "Enter contact birthday (example: 01-01-2000): "
-        }
+    "name": "Enter contact name (example: John Doe): ",
+    "address": "Enter contact address (example: 123 Main St): ",
+    "phone": "Enter contact phone number (example: +380121234567): ",
+    "email": "Enter contact email (example: email@example.com): ",
+    "birthday": "Enter contact birthday (example: 01-01-2000): "
+    }
 
 COMMAND_LIST = list(COMMANDS.keys())

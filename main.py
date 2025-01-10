@@ -1,6 +1,7 @@
 from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
 from src.constants import COMMANDS, COMMAND_LIST
+from colorama import Fore, Style
 from src.contacts.contacts_manager import ContactsManager
 from src.notes.notes_manager import NotesManager
 from src.parser import parse_input
@@ -16,7 +17,11 @@ def personal_assistant_app():
     # Display the available commands to the user
     commands_text = "\nAvailable commands:\n"
     for idx, (command, description) in enumerate(COMMANDS.items(), start=1):
-        commands_text += f"{idx}. {command} - {description}\n"
+        if command == "help":
+            commands_text += f"{idx}. {Fore.GREEN}{command} - {description}{Style.RESET_ALL}\n"
+        else:
+            commands_text += f"{idx}. {command} - {description}\n"
+
     print(commands_text)
 
     # Initialize command autocompletion to suggest commands as the user types

@@ -27,7 +27,7 @@ def validate_address(address) -> bool:
 def validate_phone(phone) -> bool:
     pattern = r'^\+?\d{1,3}?\d{10}$'
     if not re.match(pattern, phone):
-        print_error("Phone number is invalid. Please enter a valid phone number. Example: +1234567890")
+        print_error("Phone number is invalid. Please enter a valid phone number. Example: +38012123456")
         return False
     return True
 

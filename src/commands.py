@@ -53,6 +53,6 @@ def birthday_in_days():
     if upcoming_contacts:
         print_success("Upcoming birthdays:")
         for name, birthday, days_until in sorted(upcoming_contacts, key=lambda x: x[2]):
-            print(f"- {name}: {birthday} (in {days_until} days)")
+            print(f"- {name}: {birthday} (in {days_until} days {name} will turn {today.year - datetime.strptime(birthday, '%d-%m-%Y').year + 1} years old)")
     else:
         print_warning("No contacts have valid birthday information or no birthdays within the specified range.")

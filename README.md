@@ -11,55 +11,83 @@ The Personal Assistant has the following features:
 - Search contacts and notes by various criteria.
 - Command-line autocompletion support for user convenience.
 - Styled output using the `colorama` library.
+- Sort notes by tag length.
+- Display upcoming birthdays within a specified number of days.
 
 ## Functionality
 
 ### Commands:
 
-- **show-all** — Displays all contacts and notes.
-- **add-contact** — Adds a new contact.
-- **show-contact** — Displays a contact by name.
-- **search-contacts** — Search contacts by name or phone number.
-- **edit-contact** — Edit an existing contact.
-- **delete-contact** — Delete a contact.
-- **show-all-contacts** — Displays all contacts.
-- **add-note** — Adds a new note.
-- **show-notes** — Displays all notes.
-- **search-notes** — Search notes by title, content, or tags.
-- **delete-note** — Delete a note.
-- **edit-note** — Edit a note.
-- **exit** — Exit the application.
-- **help** — Shows available commands.
+- `show-all` — Displays all contacts and notes.
+- `add-contact` — Adds a new contact.
+- `show-contact` — Displays a contact by name.
+- `search-contacts` — Searches contacts by name or phone number.
+- `edit-contact` — Edits an existing contact.
+- `delete-contact` — Deletes a contact.
+- `show-all-contacts` — Displays all contacts.
+- `add-note` — Adds a new note.
+- `show-notes` — Displays all notes.
+- `search-notes` — Searches notes by title, content, or tags.
+- `delete-note` — Deletes a note.
+- `edit-note` — Edits a note.
+- `sort_note` — Sorts notes by the length of their tags.
+- `birthday-in-days` — Displays contacts with birthdays in the next N days.
+- `exit` — Exits the application.
+- `help` — Shows available commands.
 
 ### Requirements:
 
 - Python 3.7+
-- Libraries:
-  - `prompt_toolkit~=3.0.48`
-  - `colorama==0.4.6`
+
+### Required Libraries:
+
+- `prompt_toolkit~=3.0.48`
+- `colorama==0.4.6`
 
 ## How to Run
 
-### 1. Clone the repository:
+1. Clone the Repository:
 
-```bash
-git clone https://github.com/VorobeiIvan/fp-gp1.git
-```
+   ```bash
+   git clone https://github.com/VorobeiIvan/fp-gp1.git
+   ```
 
-### 2. Navigate to the project directory:
+2. Navigate to the Project Directory:
 
-```bash
-cd personal-assistant
-```
+   ```bash
+   cd personal-assistant
+   ```
 
-### 3. Install the dependencies:
+3. Set Up a Virtual Environment:
 
-```bash
-pip install -r requirements.txt
-```
+   - For Windows:
 
-### 4. Run the program:
+   ```bash
+   python -m venv .venv
+   .\.venv\Scripts\activate
+   ```
 
-```bash
-python main.py
-```
+   - For macOS/Linux:
+
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+4. Install Dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. Run the Program:
+
+   ```bash
+   python3 main.py
+   ```
+
+## Usage Notes
+
+- Use the `help` command to view the list of all available commands and their usage.
+- Ensure that the `requirements.txt` file is up-to-date with the correct versions of dependencies.
+- Keep your Python version compatible with the specified requirements to avoid runtime issues.

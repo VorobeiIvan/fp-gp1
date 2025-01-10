@@ -1,3 +1,5 @@
+from colorama import Fore
+
 COMMANDS = {
     # General commands
     "show-all": "Show all contacts and notes.",
@@ -29,3 +31,17 @@ CONTACTS_FIELDS = {
     }
 
 COMMAND_LIST = list(COMMANDS.keys())
+
+group_ranges = {
+    'General': (0, 3),
+    'Notes': (3, 9),
+    'Contacts': (9, 14),
+    'Birthdays': (14, len(COMMANDS))
+}
+
+group_colors = {
+    'General': Fore.CYAN,
+    'Notes': Fore.MAGENTA,
+    'Contacts': Fore.GREEN,
+    'Birthdays': Fore.YELLOW,
+}

@@ -1,7 +1,7 @@
 from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import WordCompleter
-from src.constants import COMMANDS, COMMAND_LIST
-from colorama import Fore, Style
+from src.constants import COMMANDS, COMMAND_LIST, group_ranges, group_colors
+from colorama import Style
 from src.contacts.contacts_manager import ContactsManager
 from src.notes.notes_manager import NotesManager
 from src.parser import parse_input
@@ -16,11 +16,20 @@ def personal_assistant_app():
 
     # Display the available commands to the user
     commands_text = "\nAvailable commands:\n"
-    for idx, (command, description) in enumerate(COMMANDS.items(), start=1):
-        if command == "help":
-            commands_text += f"{idx}. {Fore.GREEN}{command} - {description}{Style.RESET_ALL}\n"
-        else:
-            commands_text += f"{idx}. {command} - {description}\n"
+
+    for group, (start_idx, end_idx) in group_ranges.items():
+        commands_text += f"\n{group_colors[group]}{group} Commands{Style.RESET_ALL}:\n"
+        color = None
+        for idx, (command, description) in enumerate(list(COMMANDS.items())[start_idx:end_idx], start=1):
+            if group == 'General':
+                color = group_colors['General']
+            elif group == 'Notes':
+                color = group_colors['Notes']
+            elif group == 'Contacts':
+                color = group_colors['Contacts']
+            elif group == 'Birthdays':
+                color = group_colors['Birthdays']
+            commands_text += f"  {color}{command} - {description}{Style.RESET_ALL}\n"
 
     print(commands_text)
 
